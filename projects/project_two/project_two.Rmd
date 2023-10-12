@@ -16,8 +16,9 @@ Save this file in your `projects` directory. You can either save it in a project
 
 ```{r}
 library(tidyverse)
-surveys <- read_csv("surveys.csv")
+surveys <- read_csv("surveys.csv") 
 surveys_complete <- na.omit(surveys)
+
 ```
 
 ```
@@ -48,7 +49,7 @@ summary(model_fit)
 
 
 ```
-# The plot and the summary make sense which is why the graph wasn't linear. The R squared being 0.4673, the predictive power of the weight determining hindfoot length is slightly below average so I wouldn't say it's great. Also the intercept being -32 tells us the expected value which makes no sense when its -32.  
+# The plot and the summary make sense which is why the graph wasn't linear. The R squared being 0.4673 means the predictive power of the weight determining hindfoot length is slightly below average so I wouldn't say it doesn't predict the response very well. The residual standard error was 26 and the closer it is to zero the better fit the model is so that's also indicitive of the model being poor. Also the intercept tells us what we expect the weight to be -32 when the hindfoot length is 2 which also doesn't make much sense as the weight wouldn't be negative. This all goes to say that the predictor doesn't really predict the response well.   
 ```
 
 
@@ -66,7 +67,7 @@ ggplot(surveys_complete, aes(x = weight, y = hindfoot_length)) + geom_point() + 
 augmented_fit <- broom::augment(model_fit)
 qqnorm(augmented_fit$.resid)
 
-# The assumptions were violated because they were not distributed which it was assumed that they were going to be distrubuted. 
+# The assumptions were violated because they were not distributed which it was assumed that they were going to be distributed, so the residuals don't look okay. 
 
 ```
 
@@ -84,7 +85,7 @@ If you are *not* using  `surveys_complete`: Do you think there are groupings wit
 ```{r}
 ggplot(data = surveys_complete, mapping = aes(x = weight, y = hindfoot_length)) + geom_smooth(method = "lm") + geom_line() + facet_wrap(facets = vars(species_id))
 
-# From looking at the facet plots, there does not look to be interspecific variation.
+# From looking at the facet plots of the surveys complete data, there does appear to be variation across the species in terms of the weight prediction the hindfoot length. 
 
 ```
 
@@ -117,7 +118,7 @@ summary(model_fit)
 ```
 
 ```
-# The anova doesn't have the r sqaured or the residual standard error that the linear model does so it can't tell us about its predicitve power or how much deviation there is. 
+# The anova doesn't have the r sqaured, residual standard error or the intercept that the linear model does so it can't tell us about its predicitve power or how much deviation there is. 
 ```
 
 3) Plot the lm with the data, with points colored by sex. (10 pts)
@@ -144,7 +145,7 @@ surveys_complete %>%
 ```
 
 ```
-# The original plot was difficult to read so the new plot looks better but the original predictor of weight predicting hindfoot length is still the same so that relationship still looks good but sex being a predictor as well changes the relationship slightly as the weight and sex were more closely related at least looking at their estimates. 
+# It basically was saying that weight and sex predict hindfoot length but as it was mentioned before the weight is not a very good predictor of hindfoot length and sex isn't great either. Sex being a predictor as well changes the relationship slightly as its saying that weight and sex are predicting hindfoot_length but it is very similar to the original variables. The only good thing is that the plot is easier to read because of the colors. 
 ```
 
 ## Part Three
@@ -153,13 +154,13 @@ surveys_complete %>%
 1) Add and commit this document (5 pts)
 
 ```
-#Commands here
+# Go to Git in the tool bar area then hit commit and then find projects and unselect everything except project_two and then you can write your commit and hit the commit button
 ```
 
 2) Push your changes to github (10 pts)
 
 ```
-#Commands here
+# Once you write the commit and exit you can go to the git by connections and tutorial and hit the green push button and it sends it to github
 ```
 
 
